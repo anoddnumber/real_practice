@@ -34,7 +34,8 @@ public class NRepeatedElementInSize2NArray {
      * This time, we take advantage of knowing that an element is repeated n times in the array (the major element) even more.
      * The major element must appear in at least 1 sub array of length 3 twice (except for the case of n = 2, where there are 4 elements).
      * Therefore, when we loop through the array, we can simply compare the current element with the next 2 elements to check for a duplicate.
-     *
+     * Time Complexity - O(n)
+     * Space Complexity - O(1)
      * @param A
      * @return
      */
