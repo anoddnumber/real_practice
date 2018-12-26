@@ -1,4 +1,4 @@
-package mytestpackage;
+package leetcode;
 
 public class MinimumBST {
 	 // Definition for a binary tree node.
