@@ -21,6 +21,10 @@ public class KeyboardRow {
     final Set<Character> bottomRowSet = new HashSet<>(Arrays.asList(bottomRow));
 
     public String[] findWords(String[] words) {
+        /*
+            Time complexity - O(n) where n is total number of characters in all the words
+            Space complexity - O(1) - we have 3 character arrays that store 26 characters and 3 sets that store 26 characters
+         */
         List<String> ret = new ArrayList<>();
         for (String word : words) {
             if (containsAllIn1Row(word)) {
