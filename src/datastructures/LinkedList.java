@@ -18,6 +18,9 @@ public class LinkedList {
     int size = 0;
 
     int indexOf(Integer i) {
+        /*
+            Time Complexity - O(n)
+         */
         int count = 0;
         Node runner = head;
         while (runner != null) {
@@ -31,6 +34,9 @@ public class LinkedList {
     }
 
     int lastIndexOf(Integer i) {
+        /*
+            Time Complexity - O(n)
+         */
         int pos = -1;
         int count = 0;
         Node runner = head;
@@ -46,6 +52,9 @@ public class LinkedList {
     }
 
     Integer set(int index, Integer element) {
+        /*
+            Time Complexity - O(n)
+         */
         Node runner = head;
         for (int i = 0; i < index; i++) {
             runner = runner.next;
@@ -56,10 +65,16 @@ public class LinkedList {
     }
 
     int size() {
+        /*
+            Time Complexity - O(1)
+         */
         return this.size;
     }
 
     LinkedList subList(int fromIndex, int toIndex) {
+        /*
+            Time Complexity - O(n)
+         */
         LinkedList list = new LinkedList();
         Node runner = head;
         for (int i = 0; i < fromIndex; i++) {
@@ -74,6 +89,9 @@ public class LinkedList {
     }
 
     void add(int index, Integer element) {
+        /*
+            Time Complexity - O(n)
+         */
         this.size++;
         Node newNode = new Node(element, null);
         if (index == 0) {
@@ -92,6 +110,9 @@ public class LinkedList {
     }
 
     boolean add(Integer element) {
+        /*
+            Time Complexity - O(n)
+         */
         this.size++;
         if (this.head == null) {
             this.head = new Node(element, null);
@@ -108,11 +129,17 @@ public class LinkedList {
     }
 
     void clear() {
+        /*
+            Time Complexity - O(1)
+         */
         this.size = 0;
         this.head = null;
     }
 
     Integer get(int index) {
+        /*
+            Time Complexity - O(n)
+         */
         Node runner = this.head;
         for (int i = 0; i < index; i++) {
             runner = runner.next;
@@ -121,10 +148,16 @@ public class LinkedList {
     }
 
     boolean isEmpty() {
+        /*
+            Time Complexity - O(1)
+         */
         return this.size == 0;
     }
 
     Integer remove(int index) {
+        /*
+            Time Complexity - O(n)
+         */
         if (index == 0) {
             Integer value = this.head.val;
             this.head = this.head.next;
@@ -143,6 +176,9 @@ public class LinkedList {
     }
 
     boolean remove(Integer value) {
+        /*
+            Time Complexity - O(n)
+         */
         Node prev = null;
         Node runner = head;
         while (runner != null) {
@@ -176,16 +212,26 @@ public class LinkedList {
 
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
-        list.print();
         list.add(3);
-        list.print();
         list.add(6);
-        list.print();
         list.add(5);
-        list.print();
         list.add(9);
-        list.print();
         list.add(4);
-        list.print();
+        list.add(3);
+        list.add(4);
+        list.print(); // [3, 6, 5, 9, 4, 3, 4]
+
+        System.out.println(list.get(5)); // 3
+        list.subList(2, 5).print(); // [5, 9, 4]
+        System.out.println(list.size()); // 7
+        System.out.println(list.indexOf(9)); // 3
+        System.out.println(list.lastIndexOf(3)); // 5
+        System.out.println(list.remove(3)); // 9
+        list.print(); // [3, 6, 5, 4, 3, 4]
+        list.set(5, 7);
+        list.print(); // [3, 6, 5, 4, 3, 7]
+        list.clear();
+        System.out.println(list.size()); // 0
+        list.print(); // []
     }
 }
