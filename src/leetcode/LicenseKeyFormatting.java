@@ -3,6 +3,10 @@ package leetcode;
 public class LicenseKeyFormatting {
 
     public String licenseKeyFormatting(String S, int K) {
+        /*
+            Time Complexity - O(n) where n is the number of characters in S
+            Space Compelxity - O(n)
+         */
         StringBuilder sb = new StringBuilder();
         int count = 0;
 
