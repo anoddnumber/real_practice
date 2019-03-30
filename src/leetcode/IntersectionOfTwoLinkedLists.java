@@ -14,6 +14,10 @@ public class IntersectionOfTwoLinkedLists {
     }
  
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        /*
+            Time Complexity - O(n + m) where n and m are the lengths of list A and list B respectively
+            Space Complexity - O(n + m)
+         */
         HashSet<ListNode> s = new HashSet<>();
         while (headA != null || headB != null) {
             if (headA != null) {
