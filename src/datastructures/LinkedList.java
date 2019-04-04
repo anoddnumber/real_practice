@@ -158,6 +158,7 @@ public class LinkedList {
         /*
             Time Complexity - O(n)
          */
+        this.size--;
         if (index == 0) {
             Integer value = this.head.val;
             this.head = this.head.next;
