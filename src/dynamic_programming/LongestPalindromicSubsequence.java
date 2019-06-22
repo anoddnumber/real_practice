@@ -1,6 +1,9 @@
 package dynamic_programming;
 
+import utils.Utils;
+
 import java.util.Arrays;
+import java.util.Stack;
 
 public class LongestPalindromicSubsequence {
 
@@ -40,6 +43,80 @@ public class LongestPalindromicSubsequence {
         return mem[min][max];
     }
 
+    static String getLongestPalindromicSubsequence(String s) {
+        int[][] mem = new int[s.length()][s.length()];
+
+        for (int i = 0; i < s.length(); i++) {
+            mem[i][i] = 1;
+        }
+
+        for (int max = 1; max < s.length(); max++) {
+            for (int min = max - 1; min >= 0; min--) {
+                char minChar = s.charAt(min);
+                char maxChar = s.charAt(max);
+
+                int count = 0;
+                if (minChar == maxChar) {
+                    count += 2;
+                    if (min + 1 <= max - 1) {
+                        count += mem[min + 1][max - 1];
+                    }
+                } else {
+                    int moveMinCount = 0;
+                    int moveMaxCount = 0;
+
+                    if (min + 1 <= max) {
+                        moveMinCount = mem[min + 1][max];
+                    }
+
+                    if (min <= max - 1) {
+                        moveMaxCount = mem[min][max - 1];
+                    }
+
+                    count = Math.max(moveMinCount, moveMaxCount);
+                }
+                mem[min][max] = count;
+            }
+        }
+
+        return getLongestPalindromicSubsequenceForColumn(s, mem, s.length() - 1);
+    }
+
+    static String getLongestPalindromicSubsequenceForColumn(String s, int[][] mem, int col) {
+        if (col >= mem.length) return "";
+        if (s.length() == 1) return s;
+
+        boolean isEven = mem[0][col] % 2 == 0;
+        String str = "";
+        Stack<Character> stack = new Stack<>();
+
+        for (int row = 0; row < mem[col].length - 1; row++) {
+            if (mem[row][col] == 0) {
+                break;
+            }
+
+            int cur = mem[row][col];
+            int next = mem[row + 1][col];
+
+            if (cur != next) {
+                stack.push(s.charAt(row));
+            }
+
+            if (next == 1) {
+                if (!isEven) {
+                    str = "" + s.charAt(row + 1);
+                }
+
+                while (!stack.isEmpty()) {
+                    char c = stack.pop();
+                    str = c + str + c;
+                }
+                break;
+            }
+        }
+        return str;
+    }
+
     // bottom up
     static int longestPalindromicSubsequence2(String a) {
         int[][] mem = new int[a.length()][a.length()];
@@ -77,17 +154,22 @@ public class LongestPalindromicSubsequence {
             }
         }
 
+        Utils.print2DArray(mem);
+
         return mem[0][a.length() - 1];
     }
 
-//    min = 2, max = 4
-
     public static void main(String[] args) {
-        System.out.println(longestPalindromicSubsequence("ABBDCACBFHSKDJFHSKDJFHFHFHDJFHS"));
-        System.out.println(longestPalindromicSubsequence2("ABBDCACBFHSKDJFHSKDJFHFHFHDJFHS"));
+//        System.out.println(longestPalindromicSubsequence("ABBDCACBFHSKDJFHSKDJFHFHFHDJFHS"));
+//        System.out.println(longestPalindromicSubsequence2("ABBDCACBFHSKDJFHSKDJFHFHFHDJFHS"));
 
-//        String abc = "HJFFHJ";
-//        System.out.println(longestPalindromicSubsequence(abc));
+        String abc = "ASDBBAU";
+//        String abc = "ABBDCACBFHSKDJFHSKDJFHFHFHDJFHS";
+        System.out.println(longestPalindromicSubsequence(abc));
 //        System.out.println(longestPalindromicSubsequence2(abc));
+
+        String longestPalindromSubsequence = getLongestPalindromicSubsequence(abc);
+        System.out.println(longestPalindromSubsequence);
+        System.out.println("length: " + longestPalindromSubsequence.length());
     }
 }
