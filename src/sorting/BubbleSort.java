@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class BubbleSort {
 
-    static void sort(int[] nums) {
+    private static void sort(int[] nums) {
         boolean hasSwap;
         do {
             hasSwap = false;
