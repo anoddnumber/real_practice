@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class MergeSort {
 
-    static void sort(int[] nums) {
+    private static void sort(int[] nums) {
         mergeSort(nums, 0, nums.length - 1);
     }
 
